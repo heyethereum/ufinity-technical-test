@@ -63,21 +63,16 @@ const transformData = (employees) => {
 
   // let newEmployees = employees.reduce(reducer, {});
   // console.log("deptStat: ", deptStat);
-  return employees.reduce((groupedDept, { dept, salary }) => {
-    if (groupedDept[dept] == undefined) {
-      groupedDept[dept] = {
-        employeeCount: 1,
-        maxSalary: salary,
-      };
-    } else {
-      groupedDept[dept].employeeCount += 1;
-      groupedDept[dept].maxSalary = Math.max(
-        groupedDept[dept].maxSalary,
-        salary
-      );
-    }
 
-    //console.log(groupedDept[dept]);
+  return employees.reduce((groupedDept, { dept, salary }) => {
+    groupedDept[dept] = groupedDept[dept] || {
+      employeeCount: 0,
+      maxSalary: salary,
+    };
+
+    groupedDept[dept].employeeCount += 1;
+    groupedDept[dept].maxSalary = Math.max(groupedDept[dept].maxSalary, salary);
+    // console.log(groupedDept[dept]);
     return groupedDept;
   }, {});
 };
