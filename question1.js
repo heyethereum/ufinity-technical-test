@@ -61,9 +61,6 @@ const transformData = (employees) => {
   //   return { ...acc, [cur.dept]: cur };
   // }
 
-  // let newEmployees = employees.reduce(reducer, {});
-  // console.log("deptStat: ", deptStat);
-
   return employees.reduce((groupedDept, { dept, salary }) => {
     groupedDept[dept] = groupedDept[dept] || {
       employeeCount: 0,
