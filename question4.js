@@ -1,5 +1,5 @@
-import assert from "assert";
-
+const assert = require("assert");
+const { deflate } = require("zlib");
 /**
  *
  * IMPORTANT NOTE:
@@ -69,9 +69,32 @@ const transformedErrors = {
 };
 
 // You can change the input parameters to what you need
-const formatErrors = (input) => {
-  return {};
+const formatErrors = (errors) => {
+  return errors.reduce((obj, element) => {
+    let computedProperty = undefined;
+
+    const deflate = (object) => {
+      Object.keys(object).forEach((key) => {
+        //console.log("key:", key);
+        if (typeof object[key] === "object" && object[key])
+          return deflate(object[key]);
+
+        if (object.property) {
+          computedProperty === undefined
+            ? (computedProperty = object["property"])
+            : (computedProperty = computedProperty + "." + object["property"]);
+        } else if (object[key] && key === "isNumber") {
+          obj = { ...obj, [computedProperty]: [object[key]] };
+        }
+      });
+    };
+    deflate(element);
+
+    return obj;
+  }, {});
 };
 
+console.log(formatErrors(errors));
+
 // TODO: Uncommenting the assertion should not throw any exception
-// assert.deepStrictEqual(formatErrors(errors), transformedErrors);
+assert.deepStrictEqual(formatErrors(errors), transformedErrors);
