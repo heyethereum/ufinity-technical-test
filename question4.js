@@ -1,5 +1,4 @@
 const assert = require("assert");
-const { deflate } = require("zlib");
 /**
  *
  * IMPORTANT NOTE:
