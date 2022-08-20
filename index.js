@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 // create an express app
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse request data content type application/json
 app.use(bodyParser.json());
+app.use(cors());
 
 // define root route
 app.get("/", (req, res) => {

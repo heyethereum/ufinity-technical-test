@@ -73,8 +73,10 @@ const formatErrors = (errors) => {
     let computedProperty = undefined;
 
     const deflate = (object) => {
+      console.log("deflate function");
       Object.keys(object).forEach((key) => {
-        //console.log("key:", key);
+        console.log("key:", key);
+        //console.log("computedProperty:", computedProperty);
         if (typeof object[key] === "object" && object[key])
           return deflate(object[key]);
 
