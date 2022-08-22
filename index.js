@@ -12,7 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse request data content type application/json
 app.use(bodyParser.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 // define root route
 app.get("/", (req, res) => {

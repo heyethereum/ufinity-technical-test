@@ -23,9 +23,11 @@ const RequestCustomer = () => {
     <div>
       <h2>Fetch All Customers</h2>
 
-      {data.map((customer) => {
-        const { id, name } = customer;
-        return <h5 key={id}>{name}</h5>;
+      {data.map(({ id, name, email }) => {
+        if (id === 1) {
+          name = "Piggy Inu";
+        }
+        return <h5 key={id}>{`${id}. ${name} Email: ${email}`}</h5>;
       })}
     </div>
   );

@@ -34,9 +34,10 @@ Customer.getCustomerByID = (id, result) => {
 
 // create new customer
 Customer.createCustomer = (customerReqData, result) => {
-  dbConn.query("INSERT INTO customers SET ? ", customerReqData, (err, res) => {
+  dbConn.query("INSERT INTO customers SET ?", customerReqData, (err, res) => {
     if (err) {
       console.log("Error while inserting data");
+      console.log(err);
       result(null, err);
     } else {
       console.log("Customer created successfully");
